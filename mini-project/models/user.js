@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
         type: Array,
         of: mongoose.Schema.Types.ObjectId,
         ref: 'post'
-    }
+    },
+    image: String
 })
 
 module.exports = mongoose.model("user",userSchema);

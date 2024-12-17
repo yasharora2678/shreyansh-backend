@@ -8,8 +8,18 @@
   </head>
   <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-      <!-- Welcome Message -->
+      <!-- Welcome Section -->
       <div class="text-center">
+        <!-- User Profile Picture -->
+        <div class="flex items-center justify-center mb-4">
+          <img
+            src="/images/uploads/<%= image %>"
+            alt="Profile Picture"
+            class="w-20 h-20 rounded-full border-2 border-blue-500 object-cover"
+          />
+        </div>
+
+        <!-- Welcome Message -->
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome!</h1>
         <p class="text-gray-600 text-lg">
           Hello,
@@ -63,6 +73,13 @@
         </p>
         <% } else { %> <% posts.forEach((post) => { %>
         <div class="bg-gray-50 p-4 rounded-md shadow-md mb-4">
+          <!-- User Profile Info -->
+          <div class="flex items-center mb-2">
+            <p class="ml-2 font-semibold text-gray-800">
+              <%= post.user.username %>
+            </p>
+          </div>
+
           <!-- Post Content -->
           <p class="text-gray-700"><%= post.content %></p>
           <p class="text-sm text-gray-500 mt-2">
@@ -88,7 +105,7 @@
                 🗑️ Delete
               </button>
             </form>
-            <% } else { %> <% } %>
+            <% } %>
           </div>
         </div>
         <% }); %> <% } %>

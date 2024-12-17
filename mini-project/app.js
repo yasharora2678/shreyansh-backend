@@ -7,6 +7,7 @@ const postModel = require("./models/post");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const upload = require("./config/multer");
 
 require("dotenv").config();
 
@@ -19,11 +20,16 @@ app.use(cookieParser());
 connectDB();
 
 app.get("/", function (req, res) {
+  res.render("login");
+});
+
+app.get("/signup", function (req, res) {
   res.render("index");
 });
 
-app.post("/create", async function (req, res) {
+app.post("/create", upload.single("image"), async function (req, res) {
   const { username, name, email, age, password } = req.body;
+  console.log(req.file)
   const user = await userModel.findOne({ email });
   const updatedPassword = await bcrypt.hash(password, 10);
   if (user) {
@@ -36,6 +42,7 @@ app.post("/create", async function (req, res) {
     age,
     password: updatedPassword,
     posts: [],
+    image: req.file.filename
   });
 
   const token = jwt.sign(
@@ -88,7 +95,6 @@ app.post("/post/:postId/like", isLoggedIn, async function (req, res) {
       { new: true }
     );
   } else {
-    console.log("aaya");
     post.likes.splice(post.likes.indexOf(userId), 1);
     await post.save();
   }
@@ -114,7 +120,7 @@ app.get("/profile", isLoggedIn, async function (req, res) {
   const { email } = req.user;
   const user = await userModel.findOne({ email }).populate("posts");
   const posts = await postModel.find().populate("user");
-  res.render("welcome", { username: user.username, posts: posts });
+  res.render("welcome", { username: user.username, image: user.image, posts: posts });
 });
 
 function isLoggedIn(req, res, next) {
