@@ -5,7 +5,7 @@ const path = require("path");
 const ownersRouter = require('./routes/ownersRoutes') 
 const productsRouter = require('./routes/productsRoutes') 
 const usersRouter = require('./routes/usersRoutes') 
-
+const route = require('./routes')
 const connectDB = require("./config/mongoose-connection");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
 connectDB();
-
+app.use("/",route)
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);

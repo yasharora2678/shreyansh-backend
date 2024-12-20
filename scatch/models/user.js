@@ -10,10 +10,6 @@ const userSchema = mongoose.Schema({
     ref: "product",
     default: []
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
   orders: {
     type: Array,
     of: mongoose.Schema.Types.ObjectId,
