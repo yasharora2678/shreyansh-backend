@@ -14,13 +14,13 @@
   <body class="font-['helvetica_now_display']">
     <nav class="w-full flex justify-between px-5 py-3">
       <h3 class="text-xl">Scatch</h3>
-      <% var loggedIn = typeof loggedIn !== "undefined" ? loggedin : true %> <%
-      if(loggedIn){ %>
+      <% var loggedIn = typeof loggedin !== "undefined" ? loggedin : true %> 
+      <% if(loggedIn){ %>
       <div class="flex gap-5">
-        <a href="">Shop</a>
-        <a href="">Cart</a>
-        <a href="/logout">MyAccount</a>
-        <a class="text-red-600" href="">Logout</a>
+        <a href="/shop">Shop</a>
+        <a href="/cart">Cart</a>
+        <a href="/profile">MyAccount</a>
+        <a class="text-red-600" href="/logout">Logout</a>
       </div>
       <%}%>
     </nav>

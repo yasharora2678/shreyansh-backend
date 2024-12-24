@@ -8,13 +8,13 @@ const userSchema = mongoose.Schema({
     type: Array,
     of: mongoose.Schema.Types.ObjectId,
     ref: "product",
-    default: []
+    default: [],
   },
   orders: {
     type: Array,
     of: mongoose.Schema.Types.ObjectId,
     ref: "product",
-    default: []
+    default: [],
   },
   contact: Number,
   picture: String,
